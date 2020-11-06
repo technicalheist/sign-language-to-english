@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sign Language To English Converter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="English to Sign Language Converter">
+  <meta name="description" content="Online Convert English to Sign Language">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-8 sidenav">
+      <h4>Sign Symbol </h4>
+       <div class="row" id="signimages">
+        
+       </div>
+    </div>
+
+    <div class="col-sm-4">
+      <h4><small>English Language Translator</small></h4>
+      <hr>
+      <p id="englishdata"></p>
+      <button class="btn btn-primary" id="clear" style="display: none">Clear</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function appendAlphabet()
+{
+  for (i = 0; i < 26; i++) {
+  alphabet = (i+10).toString(36);
+  html = "<div class='col-sm-1'>"; 
+  html += "<img id='"+alphabet+"' class='img' style='width:70px' src='images/"+alphabet+".png'>";
+  html += "</div>";
+  $("#signimages").append(html)
+  }
+}
+
+function appendNumber()
+{
+  for(i=0; i<10;i++)
+  {
+    html = "<div class='col-sm-1'>"; 
+    html += "<img id='"+i+"' class='img' style='width:70px' src='images/"+i+".png'>";
+    html += "</div>";
+    $("#signimages").append(html)
+  }
+}
+
+function appendSpace()
+{
+   html = "<div class='col-sm-1'>"; 
+   html += "<img id='space' class='img' style='width:70px' src='images/space.png'>";
+   html += "</div>";
+   $("#signimages").append(html)
+}
+
+$(document).ready(function(){
+  appendSpace();
+  appendNumber();
+  appendAlphabet();
+
+  $(document).on('click', '.img', function(){
+      key = $(this).attr('id');
+      if(key == 'space')
+      {
+        $("#englishdata").append(" ")
+      }
+      else
+      {
+        $("#englishdata").append(key)
+      }
+      $("#clear").show();
+  });
+
+  $(document).on('click', '#clear', function(){
+      $("#englishdata").html('');
+      $("#clear").hide();
+  });
+});
+
+</script>
+</body>
+</html>
